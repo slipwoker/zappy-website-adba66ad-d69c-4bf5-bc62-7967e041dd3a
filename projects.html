@@ -1,0 +1,567 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>פרויקטים - Urban balcony</title>
+  <meta name="description" content="פרויקטים - Urban balcony provides professional גינון ועיצוב גינות services. Specializing in the urban balcony.">
+  <meta name="keywords" content="the urban balcony, urban balcony gardens, keter urban knit pouf ottoman, Urban balcony">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="פרויקטים - Urban balcony">
+  <meta property="og:description" content="פרויקטים - Urban balcony provides professional גינון ועיצוב גינות services. Specializing in the urban balcony.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="פרויקטים - Urban balcony">
+  <meta name="twitter:description" content="פרויקטים - Urban balcony provides professional גינון ועיצוב גינות services. Specializing in the urban balcony.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: 'adba66ad-d69c-4bf5-bc62-7967e041dd3a',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/urban-balcony-logo.webp" alt="Urban balcony" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/services">שירותים</a></li><li><a href="/projects">פרויקטים</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="projects-hero-section" data-layout-spec="פרויקטים-hero" data-hero-type="fullscreen-card">
+  <div class="projects-hero-bg-wrapper">
+    <img data-hero-bg="true" data-placeholder="projects-hero-bg" data-context="Wide daytime shot of a finished modern terrace with structured greenery, clean geometric lines, minimalist planters with organized plants, natural wood or stone flooring, clear sky, professional garden design showcasing precision and calm urban outdoor space" width="1920" height="1080" src="/assets/site-projects-hero-bg.webp" alt="מרפסת מעוצבת עם צמחייה מסודרת וקווים גיאומטריים נקיים" class="projects-hero-bg-image">
+  </div>
+  <div class="projects-hero-scrim"></div>
+  <div class="projects-hero-content-wrapper">
+    <div class="projects-hero-content-container">
+      <div class="projects-hero-frosted-card">
+        <h1>פרויקטים שמרגישים רגועים ומדויקים</h1>
+        <h3>מרחבים חיצוניים עירוניים עם קווים נקיים וחומרים עמידים לאורך זמן</h3>
+        <a href="/contact" class="projects-hero-cta">שיחה על המרחב שלך</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-portfolio-section" data-layout-spec="פרויקטים-portfolio">
+  <div class="projects-portfolio-container">
+    <div class="projects-portfolio-intro">
+      <h2>הפרויקטים שלנו</h2>
+      <p>גלריה של פרויקטי גינון ועיצוב שהושלמו במרפסות, גגות ומרחבים קטנים ברחבי המרכז. כל פרויקט משקף תשומת לב לפרטים הקטנים והתאמה מלאה לצרכי הלקוח – מבחירת הצמחים ועד לפתרונות העיצוב הייחודיים.</p>
+    </div>
+
+    <div class="projects-portfolio-grid">
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-1" data-context="Modern urban balcony garden in Tel Aviv with lush green plants, wooden deck flooring, contemporary planters, and string lights creating a cozy atmosphere" width="600" height="400" src="/assets/site-projects-portfolio-image-1.webp" alt="מרפסת עירונית מעוצבת עם צמחייה עשירה">
+        </div>
+        <p class="projects-portfolio-title">מרפסת עירונית • תל אביב</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-2" data-context="Rooftop garden with Mediterranean plants, decorative gravel, modern outdoor furniture, and panoramic city views" width="600" height="400" src="/assets/site-projects-portfolio-image-2.webp" alt="גינת גג עם צמחי נוי ונוף פנורמי">
+        </div>
+        <p class="projects-portfolio-title">גינת גג • רמת גן</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-3" data-context="Small balcony garden with vertical planters, hanging baskets, herbs, and compact seating area maximizing space" width="600" height="400" src="/assets/site-projects-portfolio-image-3.webp" alt="מרפסת קטנה עם פתרון גינון אנכי">
+        </div>
+        <p class="projects-portfolio-title">מרפסת קומפקטית • גבעתיים</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-4" data-context="Elegant balcony with tropical plants, bamboo screens, water feature, and modern minimalist design elements" width="600" height="400" src="/assets/site-projects-portfolio-image-4.webp" alt="מרפסת אלגנטית עם צמחים טרופיים">
+        </div>
+        <p class="projects-portfolio-title">מרפסת טרופית • הרצליה</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-5" data-context="Urban garden balcony with raised vegetable beds, herb planters, tomatoes, peppers, and edible plants" width="600" height="400" src="/assets/site-projects-portfolio-image-5.webp" alt="מרפסת עם גינת ירק ביתית">
+        </div>
+        <p class="projects-portfolio-title">גינת ירק עירונית • רמת השרון</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-6" data-context="Shaded balcony garden with ferns, shade-loving plants, pergola with climbing vines, and comfortable seating" width="600" height="400" src="/assets/site-projects-portfolio-image-6.webp" alt="מרפסת מוצלת עם צמחי צל">
+        </div>
+        <p class="projects-portfolio-title">מרפסת מוצלת • פתח תקווה</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-7" data-context="Penthouse rooftop terrace with luxury outdoor kitchen, lounge area, decorative planters, and sunset lighting" width="600" height="400" src="/assets/site-projects-portfolio-image-7.webp" alt="גג פנטהאוז מעוצב עם אזור ישיבה">
+        </div>
+        <p class="projects-portfolio-title">גג פנטהאוז • תל אביב</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-8" data-context="Balcony garden with succulents, cacti, drought-resistant plants in terracotta pots, desert-inspired design" width="600" height="400" src="/assets/site-projects-portfolio-image-8.webp" alt="מרפסת עם צמחי סוקולנטים">
+        </div>
+        <p class="projects-portfolio-title">גן סוקולנטים • ראשון לציון</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-9" data-context="Modern balcony with artificial grass, contemporary planters, LED lighting, and sleek furniture for entertaining" width="600" height="400" src="/assets/site-projects-portfolio-image-9.webp" alt="מרפסת מודרנית עם דשא סינטטי">
+        </div>
+        <p class="projects-portfolio-title">מרפסת מודרנית • הוד השרון</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-10" data-context="Romantic balcony garden with flowering plants, roses, jasmine, fairy lights, and vintage-style furniture" width="600" height="400" src="/assets/site-projects-portfolio-image-10.webp" alt="מרפסת רומנטית עם צמחים פורחים">
+        </div>
+        <p class="projects-portfolio-title">מרפסת פורחת • כפר סבא</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-11" data-context="Small courtyard garden with stone pavers, Mediterranean plants, olive tree, lavender, and rustic charm" width="600" height="400" src="/assets/site-projects-portfolio-image-11.webp" alt="חצר קטנה בסגנון ים תיכוני">
+        </div>
+        <p class="projects-portfolio-title">חצר ים תיכונית • רעננה</p>
+      </div>
+
+      <div class="projects-portfolio-item">
+        <div class="projects-portfolio-image-wrapper">
+          <img data-placeholder="projects-portfolio-image-12" data-context="Contemporary balcony with Japanese-inspired zen garden, bamboo, rocks, minimalist aesthetic, and peaceful atmosphere" width="600" height="400" src="/assets/site-projects-portfolio-image-12.webp" alt="מרפסת בסגנון יפני מינימליסטי">
+        </div>
+        <p class="projects-portfolio-title">גן זן • גבעת שמואל</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-case-studies-section" data-layout-spec="פרויקטים-case-studies">
+  <div class="projects-case-studies-container">
+    <!-- Intro Block -->
+    <div class="projects-case-studies-intro">
+      <h2>פרויקט בהשראה</h2>
+      <p>כל פרויקט מספר סיפור ייחודי של שינוי. הנה דוגמה מייצגת לתהליך התכנון והביצוע שלנו – מהרעיון הראשוני ועד התוצאה המושלמת.</p>
+    </div>
+
+    <!-- Magazine Spread Layout -->
+    <div class="projects-case-studies-spread">
+      <!-- Content Column (START) -->
+      <div class="projects-case-studies-content">
+        <h3>מרפסת עירונית בתל אביב</h3>
+        
+        <!-- Stats Pills -->
+        <div class="projects-case-studies-stats">
+          <span class="stat-pill">18 מ״ר</span>
+          <span class="stat-pill">₪25,000-35,000</span>
+          <span class="stat-pill">3 שבועות</span>
+        </div>
+
+        <p>המרפסת הקטנה התמודדה עם חשיפה קשה לשמש ומגבלות משקל. הפתרון שלנו שילב צמחייה עמידה, מערכת השקיה טפטוף אוטומטית וריצוף קל משקל מעץ טיק. התוצאה: פינת ירוק פרטית שפורחת כל השנה ומחזיקה מעמד בתנאי העיר.</p>
+      </div>
+
+      <!-- Imagery Column (END) -->
+      <div class="projects-case-studies-imagery">
+        <!-- Before/After Row -->
+        <div class="imagery-row before-after-row">
+          <div class="image-wrapper">
+            <img data-placeholder="projects-case-studies-before" data-context="Before photo of a bare urban balcony in Tel Aviv - empty concrete space with old railing, no plants, harsh sunlight, neglected appearance, city buildings in background" width="280" height="280" src="/assets/site-projects-case-studies-before.webp" alt="מרפסת לפני השיפוץ">
+            <span class="image-label">לפני</span>
+          </div>
+          <div class="image-wrapper">
+            <img data-placeholder="projects-case-studies-after" data-context="After photo of the same Tel Aviv balcony transformed - lush green plants in modern planters, wooden deck flooring, comfortable seating area, thriving garden atmosphere, professional landscaping" width="280" height="280" src="/assets/site-projects-case-studies-after.webp" alt="מרפסת אחרי השיפוץ">
+            <span class="image-label">אחרי</span>
+          </div>
+        </div>
+
+        <!-- Detail Shots Row -->
+        <div class="imagery-row details-row">
+          <div class="image-wrapper">
+            <img data-placeholder="projects-case-studies-detail-1" data-context="Close-up detail shot of wooden teak decking tiles being installed on balcony, showing the interlocking system and quality materials for urban balcony renovation" width="280" height="280" src="/assets/site-projects-case-studies-detail-1.webp" alt="פרט ריצוף עץ טיק">
+            <span class="image-label detail-label">חומרים</span>
+          </div>
+          <div class="image-wrapper">
+            <img data-placeholder="projects-case-studies-detail-2" data-context="Close-up of drip irrigation system with modern planters containing drought-resistant plants and herbs, professional garden installation detail shot" width="280" height="280" src="/assets/site-projects-case-studies-detail-2.webp" alt="פרט מערכת השקיה וצמחייה">
+            <span class="image-label detail-label">נטיעה</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="projects-reviews-section" data-layout-spec="פרויקטים-reviews">
+  <div class="projects-reviews-container">
+    <div class="projects-reviews-header">
+      <h2>מה הלקוחות שלנו אומרים</h2>
+      <p>אמינות ומקצועיות בכל פרויקט – מהתכנון ועד לביצוע המושלם</p>
+    </div>
+
+    <div class="projects-reviews-grid">
+      <article class="projects-review-card">
+        <p class="projects-review-quote">"המרפסת שלנו הפכה לפינת גן קסומה. העבודה הייתה מדויקת ונקייה, והתוצאה עברה את כל הציפיות. ממליצה בחום!"</p>
+        <p class="projects-review-attribution">שרה כהן, תל אביב</p>
+      </article>
+
+      <article class="projects-review-card">
+        <p class="projects-review-quote">"תהליך עבודה מקצועי מהרגע הראשון. הצוות הקשיב לכל בקשה והתאים את העיצוב בדיוק לצרכים שלנו. פשוט מושלם."</p>
+        <p class="projects-review-attribution">דוד לוי, רמת גן</p>
+      </article>
+
+      <article class="projects-review-card">
+        <p class="projects-review-quote">"החלום שלי על גינה עירונית התממש. ההתייחסות האישית והתשומת לב לפרטים הקטנים עשו את כל הההבדל."</p>
+        <p class="projects-review-attribution">מיכל אברהם, גבעתיים</p>
+      </article>
+    </div>
+
+    <div class="projects-reviews-cta">
+      <a href="/contact" class="btn-primary">התחילו את הפרויקט שלכם</a>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-grid"><div class="footer-section footer-about"><img src="/assets/urban-balcony-logo.webp" alt="Urban balcony" class="logo" /><p class="footer-description">מומחים בעיצוב וגינון מרפסות עירוניות. יוצרים נופי ירק ייחודיים שמביאים את הטבע אל הבית שלכם.</p></div><div class="footer-section footer-links"><h3 class="footer-title">קישורים מהירים</h3><ul class="footer-nav"><li><a href="/services">שירותים</a></li><li><a href="/projects">פרויקטים</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-section footer-contact"><h3 class="footer-title">יצירת קשר</h3><ul class="contact-list"><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-section footer-social"><h3 class="footer-title">עקבו אחרינו</h3><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="footer-legal"><a href="/privacy">מדיניות פרטיות</a><span class="separator">|</span><a href="/terms">תנאים והגבלות</a><span class="separator">|</span><a href="/accessibility">הצהרת נגישות</a></div><div class="footer-copyright"><p>© 2026 Urban balcony. כל הזכויות שמורות.</p><a href="https://zappy5.com" target="_blank" class="zappy-attribution" rel="noopener noreferrer">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
