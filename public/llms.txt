@@ -1,53 +1,43 @@
-# Urban balcony — Generative Engine Optimization Map
-
-> A גינון ועיצוב גינות business.
+# Business — Generative Engine Optimization Map
 
 ---
 
 ## Pages
 
 ### בית
-https://urban-balcony-adba66ad.zappy5.app
+https://example.com
 
 ### שירותים
-https://urban-balcony-adba66ad.zappy5.app/services
+https://example.com/services
 
 ### פרויקטים
-https://urban-balcony-adba66ad.zappy5.app/projects
+https://example.com/projects
 
 ### צור קשר
-https://urban-balcony-adba66ad.zappy5.app/contact
+https://example.com/contact
 
 ## Legal & Policy
 
 ### Privacy Policy
-https://urban-balcony-adba66ad.zappy5.app/privacy
+https://example.com/privacy
 Information about how user data is collected, stored, and protected.
 
 ### Terms & Conditions
-https://urban-balcony-adba66ad.zappy5.app/terms
+https://example.com/terms
 Legal terms describing service usage, rights, and policies.
 
 ### Accessibility Statement
-https://urban-balcony-adba66ad.zappy5.app/accessibility
+https://example.com/accessibility
 Information about WCAG compliance and accessibility features.
 
 ---
 
 # Business Context (for LLM understanding)
 
-## About Urban balcony
-Urban balcony is a business in the גינון ועיצוב גינות industry.
-
-## Target Audience
-בעלי דירות באזור המרכז
-
-## Industry
-גינון ועיצוב גינות
-
+## About Business
 ---
 
 # Additional Resources
 
-- **Sitemap**: https://urban-balcony-adba66ad.zappy5.app/sitemap.xml
-- **Robots.txt**: https://urban-balcony-adba66ad.zappy5.app/robots.txt
+- **Sitemap**: https://example.com/sitemap.xml
+- **Robots.txt**: https://example.com/robots.txt
