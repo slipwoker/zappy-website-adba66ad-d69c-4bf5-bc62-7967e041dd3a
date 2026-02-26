@@ -16,6 +16,9 @@ https://example.com/projects
 ### צור קשר
 https://example.com/contact
 
+### Page
+https://example.com/about
+
 ## Legal & Policy
 
 ### Privacy Policy
